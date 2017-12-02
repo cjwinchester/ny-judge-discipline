@@ -27,15 +27,15 @@ def handle_none(node):
 
 
 def parse_data():
-    tree = ET.parse('j.xml')
+    tree = ET.parse('judges.xml')
     root = tree.getroot()
 
     with open('judges.csv', 'w') as f:
 
         headers = ['last', 'rest', 'judge_title', 'judge_type', 'court',
                    'court_simple', 'court_co', 'result', 'status',
-                   'determination', 'determination_year', 'page_link', 'pdf_link',
-                   'annual_report_year', 'report_page_no']
+                   'determination', 'determination_year', 'page_link',
+                   'pdf_link', 'annual_report_year', 'report_page_no']
 
         writer = csv.DictWriter(f, fieldnames=headers)
 
