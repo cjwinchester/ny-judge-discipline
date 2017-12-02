@@ -7,14 +7,15 @@ import requests
 
 PDF_URL_PATTERN = 'http://cjc.ny.gov/Determinations/{}/{}'
 XML_URL = 'http://www.scjc.state.ny.us/Determinations/determination_list.xml'
+FILE_NAME = 'judges.xml'
 
 
 def fetch_data():
     """Check if XML file exists locally, download if not."""
-    if not path.isfile('judges.xml'):
+    if not path.isfile(FILE_NAME):
         r = requests.get(XML_URL)
 
-        with open('judges.xml', 'w') as f:
+        with open(FILE_NAME, 'w') as f:
             for block in r.iter_content(1024):
                 f.write(block)
 
@@ -27,7 +28,7 @@ def handle_none(node):
 
 
 def parse_data():
-    tree = ET.parse('judges.xml')
+    tree = ET.parse(FILE_NAME)
     root = tree.getroot()
 
     with open('judges.csv', 'w') as f:
